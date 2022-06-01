@@ -102,9 +102,9 @@ public class MultiVersionReplicaTest extends ClasspathBase {
       evaluate(mainClassloader, "multiVersionReplica/mainServerStop.groovy");
       evaluate(backupClassLoader, "multiVersionReplica/backupServerIsActive.groovy");
 
+
       receive(new ActiveMQConnectionFactory("tcp://localhost:61001"), 2010);
       receive(new JmsConnectionFactory("amqp://localhost:61001"), 2010);
-
       evaluate(backupClassLoader, "multiVersionReplica/backupServerStop.groovy");
    }
 
