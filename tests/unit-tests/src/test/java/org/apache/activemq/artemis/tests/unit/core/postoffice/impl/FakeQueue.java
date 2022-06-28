@@ -394,7 +394,7 @@ public class FakeQueue extends CriticalComponentImpl implements Queue {
    }
 
    @Override
-   public void acknowledge(Transaction tx, MessageReference ref, AckReason reason, ServerConsumer consumer) throws Exception {
+   public void acknowledge(Transaction tx, MessageReference ref, AckReason reason, ServerConsumer consumer, boolean decDel) throws Exception {
       // no-op
 
    }
@@ -490,7 +490,7 @@ public class FakeQueue extends CriticalComponentImpl implements Queue {
    }
 
    @Override
-   public void expire(final MessageReference ref, final ServerConsumer consumer) throws Exception {
+   public void expire(final MessageReference ref, final ServerConsumer consumer, boolean decDel) throws Exception {
       // no-op
 
    }
@@ -951,6 +951,10 @@ public class FakeQueue extends CriticalComponentImpl implements Queue {
    public LinkedListIterator<MessageReference> browserIterator() {
       // TODO Auto-generated method stub
       return null;
+   }
+
+   @Override
+   public void postAcknowledge(MessageReference ref, AckReason reason, boolean decDelivering) {
    }
 
    @Override

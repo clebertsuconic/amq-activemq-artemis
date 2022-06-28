@@ -1203,7 +1203,7 @@ public class ScheduledDeliveryHandlerTest extends Assert {
       }
 
       @Override
-      public void acknowledge(Transaction tx, MessageReference ref, AckReason reason, ServerConsumer consumer) throws Exception {
+      public void acknowledge(Transaction tx, MessageReference ref, AckReason reason, ServerConsumer consumer, boolean decDelivering) throws Exception {
 
       }
 
@@ -1408,7 +1408,7 @@ public class ScheduledDeliveryHandlerTest extends Assert {
       }
 
       @Override
-      public void expire(MessageReference ref, ServerConsumer consumer) throws Exception {
+      public void expire(MessageReference ref, ServerConsumer consumer, boolean decDelivering) throws Exception {
 
       }
 
@@ -1615,6 +1615,11 @@ public class ScheduledDeliveryHandlerTest extends Assert {
 
       @Override
       public void routeWithAck(Message message, RoutingContext context) {
+
+      }
+
+      @Override
+      public void postAcknowledge(MessageReference ref, AckReason reason, boolean decDelivering) {
 
       }
 

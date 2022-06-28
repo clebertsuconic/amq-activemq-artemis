@@ -247,7 +247,7 @@ public class PostOfficeImpl implements PostOffice, NotificationListener, Binding
 
    @Override
    public void postAcknowledge(MessageReference ref, AckReason reason) {
-      if (mirrorControllerSource != null) {
+      if (mirrorControllerSource != null && reason != AckReason.REPLACED) { // we don't send replacements on LVQ as they are replaced themselves on the target
          try {
             mirrorControllerSource.postAcknowledge(ref, reason);
          } catch (Exception e) {
@@ -1575,8 +1575,8 @@ public class PostOfficeImpl implements PostOffice, NotificationListener, Binding
          }
       }
 
-      if (mirrorControllerSource != null && !context.isMirrorController()) {
-         // we check for isMirrorController as to avoid recursive loop from there
+      if (mirrorControllerSource != null && !context.isMirrorDisabled()) {
+         // we check for isMirrorDisabled as to avoid recursive loop from there
          mirrorControllerSource.sendMessage(message, context, refs);
       }
 
